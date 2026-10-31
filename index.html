@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassPick - 나만의 경로 맞춤 파트너</title>
+
+    <!-- Google Fonts: Redaction (Fallback to serif/sans-serif if specific weight unavailable) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Redaction+10:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Material Symbols Outlined -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            primary: '#00ABE7',
+                            secondary: '#20063B',
+                            accent: '#F18F01',
+                            bg: '#F4F7F9'
+                        }
+                    },
+                    fontFamily: {
+                        redaction: ['"Redaction 10"', 'Noto Sans KR', 'sans-serif'],
+                        sans: ['"Noto Sans KR"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Redaction 10', 'Noto Sans KR', sans-serif;
+            background-color: #0f172a;
+            color: #333333;
+        }
+
+        /* Material Symbols Custom Fix */
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Phone Screen Scrollbar Styling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-0 sm:p-4">
+
+    <!-- Mobile Device Container -->
+    <div class="w-full max-w-[412px] h-[100vh] sm:h-[847px] bg-brand-bg sm:rounded-[40px] shadow-2xl overflow-hidden flex flex-col relative border-0 sm:border-[8px] border-gray-800">
+
+        <!-- Top Phone Status Bar (Decorative) -->
+        <div class="w-full bg-brand-secondary text-white px-6 pt-3 pb-2 flex justify-between items-center text-xs select-none z-50 shrink-0">
+            <span class="font-bold tracking-wider">09:41</span>
+            <div class="flex items-center space-x-2">
+                <span class="material-symbols-outlined text-sm">signal_cellular_4_bar</span>
+                <span class="material-symbols-outlined text-sm">wifi</span>
+                <span class="material-symbols-outlined text-sm">battery_5_bar</span>
+            </div>
+        </div>
+
+        <!-- MAIN SCREEN CONTAINER -->
+        <div class="flex-1 relative overflow-hidden bg-brand-bg">
+
+            <!-- 1. 첫 화면 (Splash & Intro Screen) -->
+            <section id="screen-intro" class="w-full h-full flex flex-col justify-between p-6 bg-gradient-to-b from-brand-secondary via-brand-secondary to-[#150428] text-white transition-all duration-300 absolute inset-0 z-40">
+                <!-- Top Brand Logo -->
+                <div class="pt-4 flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <span class="material-symbols-outlined text-brand-primary text-3xl">route</span>
+                        <h1 class="text-2xl font-bold tracking-wider text-brand-primary">PassPick</h1>
+                    </div>
+                    <span class="text-xs px-2 py-1 bg-white/10 rounded-full text-brand-accent">Just Pass, Your Pick</span>
+                </div>
+
+                <!-- Center Copy Content -->
+                <div class="my-auto space-y-6">
+                    <div class="inline-block px-3 py-1 bg-brand-primary/20 rounded-full border border-brand-primary/40 text-brand-primary text-xs font-semibold">
+                        나만의 진로·선택과목 파트너
+                    </div>
+                    
+                    <h2 class="text-3xl font-extrabold leading-tight">
+                        LH · 탐구과목 · 수능까지<br/>
+                        <span class="text-brand-accent">가장 좋은 선택!</span>
+                    </h2>
+                    
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        복잡한 선택과목 고민은 이제 그만.<br/>
+                        희망 계열과 진로에 맞는 과목을 추천해 드립니다.
+                    </p>
+
+                    <!-- Feature Tags -->
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-3 py-1.5 bg-white/10 rounded-xl text-xs flex items-center gap-1 border border-white/10">
+                            <span class="material-symbols-outlined text-brand-primary text-sm">school</span> 성향/계열 탐색
+                        </span>
+                        <span class="material-symbols-outlined text-gray-500 self-center text-sm">arrow_forward</span>
+                        <span class="px-3 py-1.5 bg-brand-primary/20 rounded-xl text-xs flex items-center gap-1 text-brand-primary border border-brand-primary/30">
+                            <span class="material-symbols-outlined text-sm">fact_check</span> 과목 선택 완료
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="space-y-3 pb-4">
+                    <button onclick="navigateTo('screen-list')" class="w-full py-4 bg-brand-primary hover:bg-[#0096cd] active:scale-[0.98] transition text-white font-bold rounded-2xl shadow-lg shadow-brand-primary/30 flex items-center justify-center space-x-2 text-base">
+                        <span>시작하기</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                    
+                    <button onclick="openAuthModal('login')" class="w-full py-3.5 bg-white/10 hover:bg-white/15 active:scale-[0.98] transition text-gray-200 font-medium rounded-2xl border border-white/10 text-sm">
+                        로그인 / 회원가입
+                    </button>
+                </div>
+            </section>
+
+            <!-- 2. 목록 화면 (Main List View) -->
+            <section id="screen-list" class="w-full h-full flex flex-col justify-between transition-all duration-300 absolute inset-0 z-30 hidden bg-brand-bg">
+                <!-- Header -->
+                <div class="bg-white px-5 py-4 border-b border-gray-100 flex justify-between items-center shrink-0">
+                    <div class="flex items-center space-x-2">
+                        <span class="material-symbols-outlined text-brand-primary font-bold">route</span>
+                        <span class="text-xl font-bold text-brand-secondary">PassPick</span>
+                    </div>
+                    <button onclick="handleProfileClick()" class="w-9 h-9 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary font-bold hover:bg-brand-primary hover:text-white transition relative">
+                        <span class="material-symbols-outlined text-xl">account_circle</span>
+                        <span id="auth-status-dot" class="w-2.5 h-2.5 bg-gray-400 border-2 border-white rounded-full absolute top-0 right-0"></span>
+                    </button>
+                </div>
+
+                <!-- Main Scrollable Content -->
+                <div class="flex-1 overflow-y-auto p-5 space-y-5 no-scrollbar">
+                    <!-- Greeting Header -->
+                    <div>
+                        <h2 class="text-xl font-bold text-brand-secondary" id="user-greeting">안녕하세요! 👋</h2>
+                        <p class="text-gray-600 text-sm">어떤 대학, 학과 또는 과목을 찾고 있나요?</p>
+                    </div>
+
+                    <!-- Search Input & Mode Switcher -->
+                    <div class="space-y-2">
+                        <div class="flex bg-gray-200 p-1 rounded-xl text-xs font-bold">
+                            <button onclick="switchSearchMode('dept')" id="tab-dept" class="flex-1 py-1.5 rounded-lg bg-white text-brand-primary shadow-sm transition">🎓 대학·학과 검색</button>
+                            <button onclick="switchSearchMode('subject')" id="tab-subject" class="flex-1 py-1.5 rounded-lg text-gray-500 hover:text-gray-800 transition">📚 과목 정보 검색</button>
+                        </div>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                            <input type="text" id="searchInput" oninput="handleSearch()" placeholder="대학명 또는 학과 검색 (예: 서울대, 컴퓨터공학, 경영)..." class="w-full pl-10 pr-4 py-3 bg-white rounded-2xl text-sm border border-gray-200 focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary shadow-sm">
+                        </div>
+                    </div>
+
+                    <!-- College Major Recommendation Banner (NEW) -->
+                    <div id="dept-search-results" class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-brand-secondary">🎓 목표 대학 · 학과별 필수 과목 검색</h3>
+                            <span class="text-[11px] text-gray-400" id="dept-count-badge">전국 대학 탐색 가능</span>
+                        </div>
+                        <div id="dept-list-container" class="grid grid-cols-1 gap-2.5">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Quick Category Grid -->
+                    <div id="category-grid-section">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-sm font-bold text-brand-secondary">계열별 과목 둘러보기</h3>
+                            <button onclick="resetFilter()" class="text-xs text-brand-primary font-medium">전체보기</button>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div onclick="filterCategory('인문·사회')" class="cursor-pointer bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between h-24 hover:border-brand-primary transition group">
+                                <div class="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition">
+                                    <span class="material-symbols-outlined text-xl">menu_book</span>
+                                </div>
+                                <span class="font-bold text-sm text-brand-secondary">인문·사회 계열</span>
+                            </div>
+
+                            <div onclick="filterCategory('자연·공학')" class="cursor-pointer bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between h-24 hover:border-brand-primary transition group">
+                                <div class="w-8 h-8 rounded-xl bg-amber-50 flex items-center justify-center text-brand-accent group-hover:bg-brand-accent group-hover:text-white transition">
+                                    <span class="material-symbols-outlined text-xl">science</span>
+                                </div>
+                                <span class="font-bold text-sm text-brand-secondary">자연·공학 계열</span>
+                            </div>
+
+                            <div onclick="filterCategory('예체능·기타')" class="cursor-pointer bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between h-24 hover:border-brand-primary transition group">
+                                <div class="w-8 h-8 rounded-xl bg-purple-50 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-white transition">
+                                    <span class="material-symbols-outlined text-xl">palette</span>
+                                </div>
+                                <span class="font-bold text-sm text-brand-secondary">예체능·기타</span>
+                            </div>
+
+                            <div onclick="filterCategory('진로 맞춤')" class="cursor-pointer bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between h-24 hover:border-brand-primary transition group">
+                                <div class="w-8 h-8 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition">
+                                    <span class="material-symbols-outlined text-xl">psychology</span>
+                                </div>
+                                <span class="font-bold text-sm text-brand-secondary">진로 맞춤 추천</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Registered Cards List -->
+                    <div id="subject-cards-section" class="space-y-3 pt-2">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-sm font-bold text-brand-secondary">추천 과목 정보 목록</h3>
+                            <span id="item-count" class="text-xs font-semibold px-2 py-0.5 bg-brand-primary/10 text-brand-primary rounded-full">3개</span>
+                        </div>
+
+                        <div id="card-list-container" class="space-y-3">
+                            <!-- Dynamic Cards populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Action Button to Add New Item -->
+                <div class="absolute right-5 bottom-20 z-10">
+                    <button onclick="navigateTo('screen-input')" class="w-14 h-14 bg-brand-accent text-white rounded-full shadow-lg shadow-brand-accent/40 flex items-center justify-center hover:scale-105 active:scale-95 transition">
+                        <span class="material-symbols-outlined text-2xl">add</span>
+                    </button>
+                </div>
+            </section>
+            <!-- Modal for Department Specific Subject Guide -->
+            <div id="dept-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+                <div class="bg-white w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl relative border border-gray-100 max-h-[85vh] overflow-y-auto no-scrollbar">
+                    <button onclick="closeDeptModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-lg">close</span>
+                    </button>
+
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2.5 py-1 bg-brand-primary/10 text-brand-primary text-xs font-bold rounded-lg" id="modal-university">서울대학교</span>
+                        <span class="text-xs text-gray-400" id="modal-category">공학계열</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-brand-secondary" id="modal-dept-name">컴퓨터공학과</h3>
+
+                    <div class="p-4 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-3">
+                        <div class="flex items-center space-x-2 text-brand-primary font-bold text-xs">
+                            <span class="material-symbols-outlined text-sm">stars</span>
+                            <span>핵심 권장 이수 과목 (필수)</span>
+                        </div>
+                        <div id="modal-required-subjects" class="flex flex-wrap gap-1.5">
+                            <!-- Tags -->
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-amber-50/70 rounded-2xl border border-amber-100 space-y-3">
+                        <div class="flex items-center space-x-2 text-brand-accent font-bold text-xs">
+                            <span class="material-symbols-outlined text-sm">thumb_up</span>
+                            <span>권장 이수 과목 (권장)</span>
+                        </div>
+                        <div id="modal-recommended-subjects" class="flex flex-wrap gap-1.5">
+                            <!-- Tags -->
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <h4 class="text-xs font-bold text-gray-400 uppercase">이수 가이드 & 팁</h4>
+                        <p id="modal-guide-text" class="text-xs text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-100">
+                            내용...
+                        </p>
+                    </div>
+
+                    <button onclick="closeDeptModal()" class="w-full py-3 bg-brand-primary hover:bg-[#0096cd] text-white font-bold rounded-xl text-sm transition">
+                        확인 완료
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modal for Login / Sign Up -->
+            <div id="auth-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+                <div class="bg-white w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl relative border border-gray-100 max-h-[85vh] overflow-y-auto no-scrollbar">
+                    <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-lg">close</span>
+                    </button>
+
+                    <div class="flex bg-gray-100 p-1 rounded-xl text-xs font-bold mb-2">
+                        <button onclick="toggleAuthTab('login')" id="auth-tab-login" class="flex-1 py-2 rounded-lg bg-white text-brand-primary shadow-sm">로그인</button>
+                        <button onclick="toggleAuthTab('signup')" id="auth-tab-signup" class="flex-1 py-2 rounded-lg text-gray-500">회원가입</button>
+                    </div>
+
+                    <!-- Login Form -->
+                    <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1">이메일 *</label>
+                            <input type="email" id="login-email" required placeholder="example@passpick.com" class="w-full px-3.5 py-2.5 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1">비밀번호 *</label>
+                            <input type="password" id="login-password" required placeholder="••••••••" class="w-full px-3.5 py-2.5 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <button type="submit" class="w-full py-3.5 bg-brand-primary hover:bg-[#0096cd] text-white font-bold rounded-xl text-sm shadow-md transition mt-2">
+                            로그인하기
+                        </button>
+                    </form>
+
+                    <!-- Signup Form -->
+                    <form id="signup-form" onsubmit="handleSignupSubmit(event)" class="space-y-3 hidden">
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1">이름 / 닉네임 *</label>
+                            <input type="text" id="signup-name" required placeholder="김패스" class="w-full px-3.5 py-2.5 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1">이메일 *</label>
+                            <input type="email" id="signup-email" required placeholder="example@passpick.com" class="w-full px-3.5 py-2.5 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1">비밀번호 *</label>
+                            <input type="password" id="signup-password" required placeholder="8자 이상" class="w-full px-3.5 py-2.5 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1">목표 대학교 / 학과</label>
+                            <input type="text" id="signup-target" placeholder="예: 한양대학교 반도체공학과" class="w-full px-3.5 py-2.5 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1">희망 계열</label>
+                            <select id="signup-category" class="w-full px-3.5 py-2.5 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                                <option value="자연·공학">자연·공학 계열</option>
+                                <option value="인문·사회">인문·사회 계열</option>
+                                <option value="예체능·기타">예체능·기타</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 bg-brand-accent hover:bg-[#e08300] text-white font-bold rounded-xl text-sm shadow-md transition mt-2">
+                            회원가입 완료
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Modal for User Profile Edit -->
+            <div id="profile-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+                <div class="bg-white w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl relative border border-gray-100 max-h-[85vh] overflow-y-auto no-scrollbar">
+                    <button onclick="closeProfileModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-lg">close</span>
+                    </button>
+
+                    <div class="flex items-center space-x-3 pb-2 border-b border-gray-100">
+                        <div class="w-12 h-12 rounded-full bg-brand-primary/20 text-brand-primary flex items-center justify-center font-bold text-xl">
+                            <span class="material-symbols-outlined">person</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-brand-secondary text-base" id="profile-display-name">사용자 이름</h3>
+                            <p class="text-xs text-gray-400" id="profile-display-email">user@email.com</p>
+                        </div>
+                    </div>
+
+                    <form id="profile-form" onsubmit="handleProfileUpdate(event)" class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1">이름 / 닉네임</label>
+                            <input type="text" id="profile-edit-name" required class="w-full px-3.5 py-2.5 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1">목표 대학교 / 학과</label>
+                            <input type="text" id="profile-edit-target" class="w-full px-3.5 py-2.5 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1">희망 계열</label>
+                            <select id="profile-edit-category" class="w-full px-3.5 py-2.5 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                                <option value="자연·공학">자연·공학 계열</option>
+                                <option value="인문·사회">인문·사회 계열</option>
+                                <option value="예체능·기타">예체능·기타</option>
+                            </select>
+                        </div>
+
+                        <div class="pt-2 space-y-2">
+                            <button type="submit" class="w-full py-3 bg-brand-primary hover:bg-[#0096cd] text-white font-bold rounded-xl text-sm transition">
+                                프로필 수정 저장
+                            </button>
+                            <button type="button" onclick="handleLogout()" class="w-full py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold rounded-xl text-xs transition">
+                                로그아웃
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 3. 입력 화면 (Form Input View) -->
+            <section id="screen-input" class="w-full h-full flex flex-col justify-between transition-all duration-300 absolute inset-0 z-30 hidden bg-white">
+                <!-- Header -->
+                <div class="px-5 py-4 border-b border-gray-100 flex items-center justify-between shrink-0">
+                    <button onclick="navigateTo('screen-list')" class="text-gray-600 hover:text-gray-900 flex items-center">
+                        <span class="material-symbols-outlined">arrow_back_ios</span>
+                    </button>
+                    <h2 class="text-base font-bold text-brand-secondary">새 과목 정보 등록하기</h2>
+                    <div class="w-6"></div>
+                </div>
+
+                <!-- Form Content -->
+                <div class="flex-1 overflow-y-auto p-5 space-y-5 no-scrollbar">
+                    <form id="add-item-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1.5">계열 구분 선택 *</label>
+                            <select id="form-category" class="w-full px-4 py-3 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                                <option value="인문·사회">인문·사회 계열</option>
+                                <option value="자연·공학">자연·공학 계열</option>
+                                <option value="예체능·기타">예체능·기타</option>
+                                <option value="진로 맞춤">진로 맞춤 추천</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1.5">과목명 / 선택 항목제목 *</label>
+                            <input type="text" id="form-title" required placeholder="예: [자연] 컴퓨터공학과 진학 필수 과목 세트" class="w-full px-4 py-3 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1.5">과목 정보 및 추천 이유 *</label>
+                            <textarea id="form-desc" required rows="4" placeholder="과목의 세부 내용, 세특 팁, 권장 관련 학과 등을 작성해 주세요..." class="w-full px-4 py-3 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary resize-none"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1.5">권장 학년 / 난이도 태그</label>
+                            <input type="text" id="form-tag" placeholder="예: 2~3학년 권장 / 난이도 보통" class="w-full px-4 py-3 bg-brand-bg rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-brand-primary">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-brand-secondary mb-1.5">대표 아이콘 선택</label>
+                            <div class="flex space-x-3">
+                                <label class="flex-1 border border-gray-200 rounded-xl p-3 flex flex-col items-center gap-1 cursor-pointer hover:bg-brand-bg has-[:checked]:border-brand-primary has-[:checked]:bg-blue-50">
+                                    <input type="radio" name="icon" value="book" checked class="hidden">
+                                    <span class="material-symbols-outlined text-brand-primary">book</span>
+                                    <span class="text-xs text-gray-600">일반선택</span>
+                                </label>
+                                <label class="flex-1 border border-gray-200 rounded-xl p-3 flex flex-col items-center gap-1 cursor-pointer hover:bg-brand-bg has-[:checked]:border-brand-primary has-[:checked]:bg-blue-50">
+                                    <input type="radio" name="icon" value="biotech" class="hidden">
+                                    <span class="material-symbols-outlined text-brand-primary">biotech</span>
+                                    <span class="text-xs text-gray-600">진로선택</span>
+                                </label>
+                                <label class="flex-1 border border-gray-200 rounded-xl p-3 flex flex-col items-center gap-1 cursor-pointer hover:bg-brand-bg has-[:checked]:border-brand-primary has-[:checked]:bg-blue-50">
+                                    <input type="radio" name="icon" value="calculate" class="hidden">
+                                    <span class="material-symbols-outlined text-brand-primary">calculate</span>
+                                    <span class="text-xs text-gray-600">수학/과학</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="pt-4">
+                            <button type="submit" class="w-full py-4 bg-brand-primary hover:bg-[#0096cd] active:scale-[0.98] transition text-white font-bold rounded-2xl shadow-lg shadow-brand-primary/30 text-base">
+                                과목 정보 등록 완료
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- 4. 상세 화면 (Detail View) -->
+            <section id="screen-detail" class="w-full h-full flex flex-col justify-between transition-all duration-300 absolute inset-0 z-30 hidden bg-brand-bg">
+                <!-- Header -->
+                <div class="bg-white px-5 py-4 border-b border-gray-100 flex items-center justify-between shrink-0">
+                    <button onclick="navigateTo('screen-list')" class="text-gray-600 hover:text-gray-900 flex items-center">
+                        <span class="material-symbols-outlined">arrow_back_ios</span>
+                    </button>
+                    <h2 class="text-base font-bold text-brand-secondary">상세 정보 보기</h2>
+                    <button onclick="deleteCurrentItem()" class="text-red-500 hover:text-red-700">
+                        <span class="material-symbols-outlined text-xl">delete</span>
+                    </button>
+                </div>
+
+                <!-- Detail Content -->
+                <div class="flex-1 overflow-y-auto p-5 space-y-4 no-scrollbar">
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 space-y-4">
+                        <div class="flex justify-between items-start">
+                            <span id="detail-category" class="px-3 py-1 bg-brand-primary/10 text-brand-primary text-xs font-bold rounded-full">
+                                카테고리
+                            </span>
+                            <span id="detail-tag" class="text-xs text-gray-400 font-medium">
+                                소요시간
+                            </span>
+                        </div>
+
+                        <div class="flex items-center space-x-3 pt-2">
+                            <div class="w-12 h-12 rounded-2xl bg-brand-secondary text-white flex items-center justify-center shrink-0">
+                                <span id="detail-icon" class="material-symbols-outlined text-2xl">map</span>
+                            </div>
+                            <h3 id="detail-title" class="text-xl font-bold text-brand-secondary leading-snug">
+                                제목 표시 위치
+                            </h3>
+                        </div>
+
+                        <hr class="border-gray-100 my-4">
+
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">상세 설명</h4>
+                            <p id="detail-desc" class="text-gray-700 text-sm leading-relaxed whitespace-pre-line">
+                                여기에 선택한 카드의 상세한 설명이 표시됩니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Additional Interactive Box -->
+                    <div class="bg-gradient-to-r from-brand-secondary to-[#320b5a] text-white p-5 rounded-3xl space-y-3">
+                        <div class="flex items-center space-x-2 text-brand-accent">
+                            <span class="material-symbols-outlined text-lg">lightbulb</span>
+                            <span class="text-xs font-bold">PassPick 과목 선택 꿀팁</span>
+                        </div>
+                        <p class="text-xs text-gray-200 leading-relaxed">
+                            희망 대학 및 학과(계열)의 수능 필수 지정 과목 및 이수 권장 과목을 사전에 반드시 확인하세요!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Bottom Sticky Action Buttons -->
+                <div class="p-4 bg-white border-t border-gray-100 flex gap-3">
+                    <button onclick="showToast('북마크에 저장되었습니다!')" class="w-12 h-12 rounded-2xl border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50 active:scale-95 transition">
+                        <span class="material-symbols-outlined">bookmark</span>
+                    </button>
+                    <button onclick="navigateTo('screen-list')" class="flex-1 py-3.5 bg-brand-primary hover:bg-[#0096cd] active:scale-[0.98] transition text-white font-bold rounded-2xl shadow-md text-sm flex items-center justify-center space-x-1">
+                        <span>목록으로 돌아가기</span>
+                    </button>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- BOTTOM NAVIGATION BAR (Visible on List, Detail, Input) -->
+        <nav id="bottom-nav" class="bg-white border-t border-gray-100 px-6 py-2 flex justify-around items-center shrink-0 z-40 hidden">
+            <button onclick="navigateTo('screen-list')" id="nav-home" class="flex flex-col items-center space-y-1 text-brand-primary">
+                <span class="material-symbols-outlined">home</span>
+                <span class="text-[10px] font-bold">홈/목록</span>
+            </button>
+            <button onclick="navigateTo('screen-input')" id="nav-add" class="flex flex-col items-center space-y-1 text-gray-400 hover:text-brand-primary">
+                <span class="material-symbols-outlined">add_circle</span>
+                <span class="text-[10px] font-bold">새 정보</span>
+            </button>
+            <button onclick="navigateTo('screen-intro')" id="nav-intro" class="flex flex-col items-center space-y-1 text-gray-400 hover:text-brand-primary">
+                <span class="material-symbols-outlined">info</span>
+                <span class="text-[10px] font-bold">첫 화면</span>
+            </button>
+        </nav>
+
+        <!-- Toast Notification Message -->
+        <div id="toast" class="absolute top-16 left-1/2 -translate-x-1/2 bg-brand-secondary text-white text-xs px-4 py-2.5 rounded-full shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50 flex items-center space-x-2 border border-white/10">
+            <span class="material-symbols-outlined text-brand-accent text-sm">check_circle</span>
+            <span id="toast-message">알림 메시지</span>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Global State Variables
+        let searchMode = 'dept'; // 'dept' or 'subject'
+        let selectedItemId = null;
+        let currentUser = null; // Currently logged in user object
+
+        // Expanded Database with Extensive Major & University Data across Korea
+        const deptDatabase = [
+            // 서울권 주요 대학 / 학과
+            { id: 'd1', university: '서울대학교', dept: '컴퓨터공학부', category: '자연·공학', required: ['미적분', '확률과 통계', '물리학Ⅰ', '물리학Ⅱ'], recommended: ['기하', '정보', '인공지능 수학'], guide: '수리적 논리력과 물리적 기초가 핵심입니다. [미적분]과 [물리학Ⅱ] 이수는 서류 평가 시 핵심 평가 지표입니다.' },
+            { id: 'd2', university: '서울대학교', dept: '의예과', category: '자연·공학', required: ['생명과학Ⅰ', '생명과학Ⅱ', '화학Ⅰ', '화학Ⅱ'], recommended: ['미적분', '윤리와 사상'], guide: '생명과학과 화학 Ⅱ과목까지의 깊이 있는 이수 및 심화 탐구가 필수적입니다.' },
+            { id: 'd3', university: '서울대학교', dept: '경영학과', category: '인문·사회', required: ['확률과 통계', '경제'], recommended: ['미적분', '사회·문화', '정치와 법'], guide: '상경계열 진학을 위해 수리적 역량을 증명할 수 있는 [미적분] 수강을 권장합니다.' },
+            { id: 'd4', university: '연세대학교', dept: '전기전자공학부', category: '자연·공학', required: ['미적분', '기하', '물리학Ⅰ', '물리학Ⅱ'], recommended: ['화학Ⅰ', '공학 일반'], guide: '[물리학Ⅱ]와 [기하] 과목 수강 실적이 평가에 핵심 반영됩니다.' },
+            { id: 'd5', university: '연세대학교', dept: '신문방송·언론홍보영상학부', category: '인문·사회', required: ['사회·문화', '언어와 매체'], recommended: ['정치와 법', '세계지리'], guide: '미디어 및 사회 현상 분석 능력을 증명하는 사회탐구 과목 세특이 유리합니다.' },
+            { id: 'd6', university: '고려대학교', dept: '인공지능학과', category: '자연·공학', required: ['미적분', '확률과 통계', '인공지능 수학'], recommended: ['기하', '정보', '물리학Ⅰ'], guide: '수학적 알고리즘 설계 능력과 프로그래밍 기반 과목 탐구가 우수하게 평가받습니다.' },
+            { id: 'd7', university: '고려대학교', dept: '정치외교학과', category: '인문·사회', required: ['정치와 법', '사회·문화'], recommended: ['세계사', '윤리와 사상'], guide: '글로벌 사회 구조와 법치, 정치 제도를 다루는 깊이 있는 과목 선택이 중요합니다.' },
+            { id: 'd8', university: '성균관대학교', dept: '반도체시스템공학과', category: '자연·공학', required: ['미적분', '기하', '물리학Ⅰ', '물리학Ⅱ'], recommended: ['화학Ⅰ', '화학Ⅱ'], guide: '반도체 물리학과 회로 이론의 기반이 되는 물리/수학 심화 과목 이수가 필수입니다.' },
+            { id: 'd8_hanyang', university: '한양대학교', dept: '반도체공학과 (SK하이닉스 계약학과)', category: '자연·공학', required: ['미적분', '기하', '물리학Ⅰ', '물리학Ⅱ'], recommended: ['화학Ⅰ', '정보', '인공지능 수학'], guide: 'SK하이닉스 채용 조건형 계약학과입니다. 반도체 소자, 물리, 회로 이해를 위한 물리학Ⅱ 및 미적분/기하 필수 이수가 핵심 정성평가 요소입니다.' },
+            { id: 'd9', university: '서강대학교', dept: '컴퓨터공학과', category: '자연·공학', required: ['미적분', '확률과 통계', '물리학Ⅰ'], recommended: ['기하', '정보'], guide: '인공지능 및 빅데이터 트렌드에 발맞춘 수학·SW 과목 이수 스토리가 강점입니다.' },
+            { id: 'd10', university: '한양대학교', dept: '기계공학부', category: '자연·공학', required: ['미적분', '기하', '물리학Ⅰ', '물리학Ⅱ'], recommended: ['공학 일반', '화학Ⅰ'], guide: '역학의 기초가 되는 [물리학Ⅱ] 필수 선택 및 기하학적 사고 능력이 핵심입니다.' },
+            { id: 'd11', university: '중앙대학교', dept: '약학부', category: '자연·공학', required: ['화학Ⅰ', '화학Ⅱ', '생명과학Ⅰ', '생명과학Ⅱ'], recommended: ['미적분', '확률과 통계'], guide: '약물 작용과 생체 반응 이해를 위한 화학 및 생명과학 Ⅱ 과목 완수가 필수입니다.' },
+            { id: 'd12', university: '경희대학교', dept: '한의예과', category: '자연·공학', required: ['생명과학Ⅰ', '생명과학Ⅱ', '화학Ⅰ'], recommended: ['윤리와 사상', '한문Ⅰ'], guide: '자연계열 과목 기반 위에 동양철학과 한주의적 인문학 기초 과목(한문/윤리) 탐구가 빛을 발합니다.' },
+            { id: 'd13', university: '한국외국어대학교', dept: '국제학부 / 통번역대학', category: '인문·사회', required: ['세계사', '동아시아사', '영어권 문화'], recommended: ['정치와 법', '사회·문화'], guide: '글로벌 이슈 탐구와 다양한 문화권 지리/역사 과목 이수가 인상적인 세특을 만듭니다.' },
+            { id: 'd14', university: '서울시립대학교', dept: '도시행정학과', category: '인문·사회', required: ['정치와 법', '사회·문화', '한국지리'], recommended: ['경제', '여행지리'], guide: '도시 계획, 지역 정책, 지리 정보 체계 관련 과목 체인 학습이 유리합니다.' },
+            
+            // 거점 국립대 & 전국 주요 대학
+            { id: 'd15', university: 'KAIST (한국과학기술원)', dept: '무학과 / 공학계열', category: '자연·공학', required: ['미적분', '기하', '물리학Ⅱ', '화학Ⅱ'], recommended: ['생명과학Ⅱ', '정보'], guide: '이공계 최고 학부로서 융합 과학 탐구와 Ⅱ과목 2개 이상 이수가 매우 강력히 권장됩니다.' },
+            { id: 'd16', university: 'UNIST / GIST / DGIST', dept: '융합공학부', category: '자연·공학', required: ['미적분', '기하', '물리학Ⅰ', '화학Ⅰ'], recommended: ['인공지능 수학', '정보'], guide: '수학, 과학 전반의 균형 잡힌 심화 과목 이수와 문제 해결 역량이 핵심 기준입니다.' },
+            { id: 'd17', university: '부산대학교', dept: '조선해양공학과 / 항공우주', category: '자연·공학', required: ['미적분', '기하', '물리학Ⅰ', '물리학Ⅱ'], recommended: ['화학Ⅰ'], guide: '유체역학 및 구조역학 이수를 위한 물리학과 수학 과목 완수가 절대적입니다.' },
+            { id: 'd18', university: '경북대학교', dept: '전자공학부', category: '자연·공학', required: ['미적분', '기하', '물리학Ⅰ', '물리학Ⅱ'], recommended: ['화학Ⅰ', '정보'], guide: '전국 최대 규모 전자공학부로, 회로 및 반도체 이해를 위한 물리Ⅱ 과목 이수가 우대됩니다.' },
+            { id: 'd19', university: '전남대학교', dept: '수의예과', category: '자연·공학', required: ['생명과학Ⅰ', '생명과학Ⅱ', '화학Ⅰ', '화학Ⅱ'], recommended: ['미적분', '확률과 통계'], guide: '동물 생리학 및 수의약학 기초를 다지는 생명과학 과목군 전반의 높은 학업 성취도가 필요합니다.' },
+            { id: 'd20', university: '충북대학교 / 충남대학교', dept: '간호학과', category: '자연·공학', required: ['생명과학Ⅰ', '화학Ⅰ'], recommended: ['생명과학Ⅱ', '인간 발달', '심리학'], guide: '인체 생리와 간호 돌봄 윤리를 체득할 수 있는 생명과학 및 심리/교양 과목 조합이 효과적입니다.' },
+            { id: 'd21', university: '이화여자대학교', dept: '초등교육과 / 사범대학', category: '인문·사회', required: ['사회·문화', '윤리와 사상', '교육학'], recommended: ['언어와 매체', '화법과 작문'], guide: '전 과목 균형 학습과 교육적 가치관을 입증할 수 있는 교육학 및 사회 인문 과목을 추천합니다.' },
+            { id: 'd22', university: '홍익대학교', dept: '산업디자인학과 / 미술대학', category: '예체능·기타', required: ['미술 창작', '미술 감상과 비평'], recommended: ['사회·문화', '정보', '디자인 일반'], guide: '조형 감각과 더불어 사용자 경험(UX) 분석에 도움 되는 정보/사회 과목 연계가 우수합니다.' },
+            { id: 'd23', university: '중앙대학교 / 동국대학교', dept: '연극영화 / 미디어연기', category: '예체능·기타', required: ['연극', '문학'], recommended: ['화법과 작문', '세계 문학'], guide: '대본 해석력과 감정 표현의 인문학적 깊이를 기를 수 있는 국어/문학 및 예술 과목 추천.' },
+            { id: 'd24', university: '한국교원대학교', dept: '수학교육과', category: '자연·공학', required: ['미적분', '기하', '확률과 통계'], recommended: ['인공지능 수학', '수학과 과제 탐구'], guide: '수학의 전 과목 완수 및 수학적 구조를 교수할 수 있는 과제 탐구 실적이 정성 평가 요소입니다.' }
+        ];
+
+        // Subject Recommendation Items
+        let items = [
+            {
+                id: 1,
+                category: '자연·공학',
+                title: '컴퓨터공학과 진학 필수 수학·물리 조합',
+                desc: '미적분, 기하, 물리학Ⅰ, 정보 과목 중심 선택 가이드. 알고리즘 및 프로그래밍 기초 세특 작성 방법 포함.',
+                tag: '2~3학년 권장',
+                icon: 'calculate'
+            },
+            {
+                id: 2,
+                category: '인문·사회',
+                title: '경영·경제학과 필수 수리 & 사회탐구 선택',
+                desc: '확률과 통계, 미적분, 경제, 사회·문화 조합 추천. 상경계열 진학 시 수리적 역량 강조법 안내.',
+                tag: '상경계열 핵심',
+                icon: 'book'
+            },
+            {
+                id: 3,
+                category: '진로 맞춤',
+                title: '의예·약학·바이오 계열 Ⅱ과목 이수 가이드',
+                desc: '생명과학Ⅱ 및 화학Ⅱ 세특 주제 예시와 대학별 권장 이수 과목 점수 반영 기준 정리.',
+                tag: '의약학 계열',
+                icon: 'biotech'
+            }
+        ];
+
+        // Auth Modal Controls
+        function openAuthModal(defaultTab = 'login') {
+            toggleAuthTab(defaultTab);
+            document.getElementById('auth-modal').classList.remove('hidden');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+        }
+
+        function toggleAuthTab(tab) {
+            const loginBtn = document.getElementById('auth-tab-login');
+            const signupBtn = document.getElementById('auth-tab-signup');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+
+            if (tab === 'login') {
+                loginBtn.className = 'flex-1 py-2 rounded-lg bg-white text-brand-primary shadow-sm';
+                signupBtn.className = 'flex-1 py-2 rounded-lg text-gray-500';
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+            } else {
+                signupBtn.className = 'flex-1 py-2 rounded-lg bg-white text-brand-primary shadow-sm';
+                loginBtn.className = 'flex-1 py-2 rounded-lg text-gray-500';
+                signupForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            }
+        }
+
+        function handleProfileClick() {
+            if (currentUser) {
+                openProfileModal();
+            } else {
+                openAuthModal('login');
+            }
+        }
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const name = email.split('@')[0] || '사용자';
+
+            currentUser = {
+                name: name,
+                email: email,
+                target: '한양대학교 반도체공학과',
+                category: '자연·공학'
+            };
+
+            updateUserUI();
+            closeAuthModal();
+            showToast(`${currentUser.name}님 환영합니다!`);
+        }
+
+        function handleSignupSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const target = document.getElementById('signup-target').value || '미정';
+            const category = document.getElementById('signup-category').value;
+
+            currentUser = { name, email, target, category };
+
+            updateUserUI();
+            closeAuthModal();
+            showToast('회원가입이 완료되었습니다!');
+        }
+
+        // Profile Edit Controls
+        function openProfileModal() {
+            if (!currentUser) return;
+
+            document.getElementById('profile-display-name').textContent = currentUser.name;
+            document.getElementById('profile-display-email').textContent = currentUser.email;
+            document.getElementById('profile-edit-name').value = currentUser.name;
+            document.getElementById('profile-edit-target').value = currentUser.target;
+            document.getElementById('profile-edit-category').value = currentUser.category;
+
+            document.getElementById('profile-modal').classList.remove('hidden');
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profile-modal').classList.add('hidden');
+        }
+
+        function handleProfileUpdate(e) {
+            e.preventDefault();
+            if (!currentUser) return;
+
+            currentUser.name = document.getElementById('profile-edit-name').value.trim();
+            currentUser.target = document.getElementById('profile-edit-target').value.trim();
+            currentUser.category = document.getElementById('profile-edit-category').value;
+
+            updateUserUI();
+            closeProfileModal();
+            showToast('프로필 정보가 수정되었습니다.');
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            updateUserUI();
+            closeProfileModal();
+            showToast('로그아웃되었습니다.');
+        }
+
+        function updateUserUI() {
+            const greeting = document.getElementById('user-greeting');
+            const dot = document.getElementById('auth-status-dot');
+
+            if (currentUser) {
+                greeting.textContent = `안녕하세요, ${currentUser.name}님! 👋`;
+                dot.className = 'w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full absolute top-0 right-0';
+            } else {
+                greeting.textContent = '안녕하세요! 👋';
+                dot.className = 'w-2.5 h-2.5 bg-gray-400 border-2 border-white rounded-full absolute top-0 right-0';
+            }
+        }
+
+        // Mode Switcher for Search (University Dept vs Subject List)
+        function switchSearchMode(mode) {
+            searchMode = mode;
+            const tabDept = document.getElementById('tab-dept');
+            const tabSubject = document.getElementById('tab-subject');
+            const deptSection = document.getElementById('dept-search-results');
+            const categorySection = document.getElementById('category-grid-section');
+            const subjectSection = document.getElementById('subject-cards-section');
+            const searchInput = document.getElementById('searchInput');
+
+            if (mode === 'dept') {
+                tabDept.className = 'flex-1 py-1.5 rounded-lg bg-white text-brand-primary shadow-sm transition';
+                tabSubject.className = 'flex-1 py-1.5 rounded-lg text-gray-500 hover:text-gray-800 transition';
+                deptSection.classList.remove('hidden');
+                categorySection.classList.remove('hidden');
+                subjectSection.classList.remove('hidden');
+                searchInput.placeholder = '대학명 또는 학과 검색 (예: 서울대, 컴퓨터공학, 경영)...';
+            } else {
+                tabSubject.className = 'flex-1 py-1.5 rounded-lg bg-white text-brand-primary shadow-sm transition';
+                tabDept.className = 'flex-1 py-1.5 rounded-lg text-gray-500 hover:text-gray-800 transition';
+                deptSection.classList.add('hidden');
+                categorySection.classList.remove('hidden');
+                subjectSection.classList.remove('hidden');
+                searchInput.placeholder = '과목명 또는 키워드 검색 (예: 미적분, 물리학, 경영)...';
+            }
+            handleSearch();
+        }
+
+        // Render Department Search Results
+        function renderDeptList(data = deptDatabase) {
+            const container = document.getElementById('dept-list-container');
+            const badge = document.getElementById('dept-count-badge');
+            badge.textContent = `${data.length}개 발견`;
+
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-6 bg-white rounded-2xl border border-dashed border-gray-200">
+                        <p class="text-xs text-gray-400">검색 조건에 맞는 대학 학과가 없습니다.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = data.slice(0, 5).map(item => `
+                <div onclick="openDeptModal('${item.id}')" class="bg-white p-3.5 rounded-2xl border border-gray-100 shadow-sm hover:border-brand-primary transition cursor-pointer flex items-center justify-between group">
+                    <div class="space-y-1">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-[10px] font-bold px-2 py-0.5 bg-brand-primary/10 text-brand-primary rounded-md">${item.university}</span>
+                            <span class="text-[10px] text-gray-400 font-medium">${item.category}</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-brand-secondary group-hover:text-brand-primary transition">${item.dept}</h4>
+                    </div>
+                    <div class="flex items-center space-x-1 text-xs text-brand-primary font-bold">
+                        <span>과목보기</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Department Specific Subject Modal Control
+        function openDeptModal(deptId) {
+            let dept = deptDatabase.find(d => d.id === deptId);
+            
+            // Handle dynamically generated custom university search fallback
+            if (!dept && deptId.startsWith('custom-')) {
+                const query = document.getElementById('searchInput').value.trim();
+                const isSemi = query.includes('반도체');
+                const isSTEM = isSemi || query.includes('공학') || query.includes('컴퓨터') || query.includes('의') || query.includes('약') || query.includes('이') || query.includes('과학') || query.includes('바이오') || query.includes('전자') || query.includes('수학');
+                const isArts = query.includes('디자인') || query.includes('음학') || query.includes('음악') || query.includes('체육') || query.includes('미술') || query.includes('연기');
+                const category = isArts ? '예체능·기타' : (isSTEM ? '자연·공학' : '인문·사회');
+
+                let req = isSTEM ? ['미적분', '물리학Ⅰ', '화학Ⅰ'] : (isArts ? ['미술/음악 일반', '문학'] : ['확률과 통계', '사회·문화']);
+                let rec = isSTEM ? ['기하', '물리학Ⅱ', '정보'] : (isArts ? ['디자인 일반', '화법과 작문'] : ['정치와 법', '경제']);
+
+                if (isSemi) {
+                    req = ['미적분', '기하', '물리학Ⅰ', '물리학Ⅱ'];
+                    rec = ['화학Ⅰ', '정보', '인공지능 수학'];
+                }
+
+                dept = {
+                    university: query.includes('대') ? query : `${query} 관련 대학`,
+                    dept: query.includes('과') || query.includes('학') ? query : `${query} 관련 전공`,
+                    category: category,
+                    required: req,
+                    recommended: rec,
+                    guide: `[${query}] 전공은 ${category} 핵심 과목 이수가 필수적입니다. 수능 최저기준 및 학종 세특 평가에서 위 과목 선택이 가장 유리합니다.`
+                };
+            }
+
+            if (!dept) return;
+
+            document.getElementById('modal-university').textContent = dept.university;
+            document.getElementById('modal-category').textContent = dept.category;
+            document.getElementById('modal-dept-name').textContent = dept.dept;
+            document.getElementById('modal-guide-text').textContent = dept.guide;
+
+            const reqContainer = document.getElementById('modal-required-subjects');
+            reqContainer.innerHTML = dept.required.map(sub => `
+                <span class="px-2.5 py-1 bg-blue-600 text-white font-bold text-xs rounded-lg shadow-sm">${sub}</span>
+            `).join('');
+
+            const recContainer = document.getElementById('modal-recommended-subjects');
+            recContainer.innerHTML = dept.recommended.map(sub => `
+                <span class="px-2.5 py-1 bg-amber-500 text-white font-bold text-xs rounded-lg shadow-sm">${sub}</span>
+            `).join('');
+
+            document.getElementById('dept-modal').classList.remove('hidden');
+        }
+
+        function closeDeptModal() {
+            document.getElementById('dept-modal').classList.add('hidden');
+        }
+
+        // Enhanced Dynamic Search & Fallback Generation for ANY University/Department Input
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            
+            if (searchMode === 'dept') {
+                let filteredDepts = deptDatabase.filter(d => 
+                    d.university.toLowerCase().includes(query) ||
+                    d.dept.toLowerCase().includes(query) ||
+                    d.category.toLowerCase().includes(query) ||
+                    d.required.some(r => r.toLowerCase().includes(query)) ||
+                    d.recommended.some(r => r.toLowerCase().includes(query))
+                );
+
+                // Smart Fallback Generator for user typed queries (Matches ANY university or major typed!)
+                if (query.length >= 2 && filteredDepts.length === 0) {
+                    const isSemi = query.includes('반도체');
+                    const isSTEM = isSemi || query.includes('공학') || query.includes('컴퓨터') || query.includes('의') || query.includes('약') || query.includes('이') || query.includes('과학') || query.includes('바이오') || query.includes('전자') || query.includes('수학');
+                    const isArts = query.includes('디자인') || query.includes('음학') || query.includes('음악') || query.includes('체육') || query.includes('미술') || query.includes('연기');
+                    
+                    const category = isArts ? '예체능·기타' : (isSTEM ? '자연·공학' : '인문·사회');
+                    let required = isSTEM ? ['미적분', '물리학Ⅰ', '화학Ⅰ'] : (isArts ? ['미술/음악 일반', '문학'] : ['확률과 통계', '사회·문화']);
+                    let recommended = isSTEM ? ['기하', '물리학Ⅱ', '정보'] : (isArts ? ['디자인 일반', '화법과 작문'] : ['정치와 법', '경제']);
+
+                    if (isSemi) {
+                        required = ['미적분', '기하', '물리학Ⅰ', '물리학Ⅱ'];
+                        recommended = ['화학Ⅰ', '정보', '인공지능 수학'];
+                    }
+
+                    filteredDepts = [{
+                        id: 'custom-' + Date.now(),
+                        university: query.includes('대') ? query : `${query} 관련 대학`,
+                        dept: query.includes('과') || query.includes('학') ? query : `${query} 관련 전공`,
+                        category: category,
+                        required: required,
+                        recommended: recommended,
+                        guide: `[${query}] 전공은 ${category} 핵심 과목 이수가 필수적입니다. 수능 최저기준 및 학종 세특 평가에서 위 과목 선택이 가장 유리합니다.`
+                    }];
+                }
+
+                renderDeptList(filteredDepts);
+            } else {
+                filterList();
+            }
+        }
+
+        // Navigation Controller
+        function navigateTo(screenId) {
+            const screens = ['screen-intro', 'screen-list', 'screen-input', 'screen-detail'];
+            screens.forEach(id => {
+                const el = document.getElementById(id);
+                if (id === screenId) {
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+
+            // Toggle Bottom Nav visibility
+            const bottomNav = document.getElementById('bottom-nav');
+            if (screenId === 'screen-intro') {
+                bottomNav.classList.add('hidden');
+            } else {
+                bottomNav.classList.remove('hidden');
+            }
+
+            // Highlight active nav item
+            document.getElementById('nav-home').className = screenId === 'screen-list' ? 'flex flex-col items-center space-y-1 text-brand-primary' : 'flex flex-col items-center space-y-1 text-gray-400';
+            document.getElementById('nav-add').className = screenId === 'screen-input' ? 'flex flex-col items-center space-y-1 text-brand-primary' : 'flex flex-col items-center space-y-1 text-gray-400';
+            document.getElementById('nav-intro').className = screenId === 'screen-intro' ? 'flex flex-col items-center space-y-1 text-brand-primary' : 'flex flex-col items-center space-y-1 text-gray-400';
+        }
+
+        // Render Card List
+        function renderList(filteredData = null) {
+            const container = document.getElementById('card-list-container');
+            const displayData = filteredData || items;
+            
+            document.getElementById('item-count').textContent = `${displayData.length}개`;
+
+            if (displayData.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 bg-white rounded-2xl border border-dashed border-gray-200">
+                        <span class="material-symbols-outlined text-gray-300 text-4xl mb-1">search_off</span>
+                        <p class="text-xs text-gray-400">등록된 과목 정보가 없습니다.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = displayData.map(item => `
+                <div onclick="openDetail(${item.id})" class="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-brand-primary/30 transition cursor-pointer flex items-center justify-between group">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-primary/10 text-brand-primary flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition shrink-0">
+                            <span class="material-symbols-outlined text-xl">${item.icon || 'map'}</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-brand-accent uppercase tracking-wider">${item.category}</span>
+                            <h4 class="font-bold text-sm text-brand-secondary group-hover:text-brand-primary transition">${item.title}</h4>
+                            <p class="text-xs text-gray-400 line-clamp-1">${item.desc}</p>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined text-gray-300 group-hover:text-brand-primary group-hover:translate-x-1 transition text-sm">chevron_right</span>
+                </div>
+            `).join('');
+        }
+
+        // Open Detail View
+        function openDetail(id) {
+            const item = items.find(i => i.id === id);
+            if (!item) return;
+
+            selectedItemId = id;
+            document.getElementById('detail-category').textContent = item.category;
+            document.getElementById('detail-title').textContent = item.title;
+            document.getElementById('detail-desc').textContent = item.desc;
+            document.getElementById('detail-tag').textContent = item.tag || '정보 없음';
+            document.getElementById('detail-icon').textContent = item.icon || 'map';
+
+            navigateTo('screen-detail');
+        }
+
+        // Handle Add Form Submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const category = document.getElementById('form-category').value;
+            const title = document.getElementById('form-title').value.trim();
+            const desc = document.getElementById('form-desc').value.trim();
+            const tag = document.getElementById('form-tag').value.trim() || '일반';
+            const icon = document.querySelector('input[name="icon"]:checked').value;
+
+            const newItem = {
+                id: Date.now(),
+                category,
+                title,
+                desc,
+                tag,
+                icon
+            };
+
+            items.unshift(newItem);
+            renderList();
+            showToast('새 과목 정보가 등록되었습니다!');
+
+            document.getElementById('add-item-form').reset();
+            navigateTo('screen-list');
+        }
+
+        // Delete Item
+        function deleteCurrentItem() {
+            if (!selectedItemId) return;
+            items = items.filter(i => i.id !== selectedItemId);
+            renderList();
+            showToast('정보가 삭제되었습니다.');
+            navigateTo('screen-list');
+        }
+
+        // Category Filtering
+        function filterCategory(category) {
+            switchSearchMode('subject');
+            const filtered = items.filter(i => i.category === category);
+            renderList(filtered);
+            showToast(`'${category}' 필터가 적용되었습니다.`);
+        }
+
+        function resetFilter() {
+            document.getElementById('searchInput').value = '';
+            renderDeptList();
+            renderList();
+        }
+
+        // Search Keyword Filter for Subjects
+        function filterList() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = items.filter(i => 
+                i.title.toLowerCase().includes(query) || 
+                i.desc.toLowerCase().includes(query) ||
+                i.category.toLowerCase().includes(query)
+            );
+            renderList(filtered);
+        }
+
+        // Toast Message Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = msg;
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 2500);
+        }
+
+        // Initialize App on Load
+        window.onload = function() {
+            renderDeptList();
+            renderList();
+        };
+    </script>
+</body>
+</html>
